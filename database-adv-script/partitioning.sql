@@ -1,0 +1,13 @@
+CREATE TABLE "Booking_new" (
+    LIKE "Booking" INCLUDING DEFAULTS INCLUDING CONSTRAINTS
+) PARTITION BY RANGE (start_date);
+
+CREATE TABLE booking_2025_q3 PARTITION OF "Booking_new"
+  FOR VALUES FROM ('2025-06-01') TO ('2025-09-01');
+
+INSERT INTO "Booking_new" (SELECT * FROM "Booking");
+
+BEGIN;
+ALTER TABLE "Booking" RENAME TO "Booking_old";
+ALTER TABLE "Booking_new" RENAME TO "Booking";
+COMMIT;

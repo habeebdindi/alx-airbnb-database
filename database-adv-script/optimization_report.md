@@ -1,0 +1,2 @@
+# Optimization Report
+Nothing much, just restructured the query and the JOINS (check the performance.sql file). Could not measure indexes because postgres was not using them for my small-sized sample table as they would be slower.
